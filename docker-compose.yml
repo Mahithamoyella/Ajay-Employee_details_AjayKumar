@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:14
+    container_name: ajay_employee_postgres1
+    environment:
+      POSTGRES_DB: auth_db
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin834
+    ports:
+      - "5463:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
+
+  backend:
+    build: ./Backend
+    container_name: ajay_employee_backend1
+    ports:
+      - "3065:3065"
+    environment:
+      DB_USER: postgres
+      DB_PASSWORD: admin834
+      DB_NAME: auth_db
+      DB_HOST: postgres
+      DB_PORT: 5432
+    depends_on:
+      - postgres
+    volumes:
+      - ./Backend/uploads:/app/Uploads
+
+  frontend:
+    build: ./Frontend
+    container_name: ajay_employee_frontend1
+    ports:
+      - "8079:80"
+    depends_on:
+      - backend
+
+volumes:
+  pgdata:
+

@@ -13,12 +13,18 @@ const app = express();
 // CORS middleware
 app.use(cors({
   origin: [
+<<<<<<< HEAD
     'http://44.202.114.151:8079', // Login Server
     'http://44.202.114.151:3065', // Employee Server
     'http://44.202.114.151:5500', // Live Server (Default)
     'http://127.0.0.1:5500', // Live Server (IP)
    // 'http://44.202.114.151:8037'  // Live Server (Alternate)
   ]
+=======
+    'http://18.234.138.238:8079',  // Frontend Running on port 8079
+    'http://18.234.138.238:3065'   // Backend
+  ],
+>>>>>>> 0f2386a0daaea41cbd415a54e3bb90c8b0b5b8b3
 }));
 
 app.use(express.json());
@@ -257,9 +263,12 @@ app.delete('/api/delete-employee/:id', async (req, res) => {
   }
 });
 
+<<<<<<< HEAD
 // Default route for favicon to suppress 404
 app.get('/favicon.ico', (req, res) => res.status(204).end());
 
+=======
+>>>>>>> 0f2386a0daaea41cbd415a54e3bb90c8b0b5b8b3
 const PORT = process.env.EMPLOYEE_PORT || 3065;
 app.listen(PORT, () => {
   console.log(`Employee server running on port ${PORT}`);
